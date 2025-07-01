@@ -1,2 +1,13 @@
 
 @import "tailwindcss";
+
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.input {
+  
+  padding: 0 5px;
+  height: 40px;
+}
