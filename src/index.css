@@ -11,3 +11,34 @@ body {
   padding: 0 5px;
   height: 40px;
 }
+
+label {
+  font-weight: 600;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+textarea {
+  padding: 10px 5px;
+  font-size: 14px;
+}
+
+button {
+  width: fit-content;
+  margin:  0 auto;
+  padding: 10px 40px;
+  background-color: #17B8A6;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+p {
+  color: rgb(241, 31, 31);
+  font-size: 12px;
+  text-align: center;
+}

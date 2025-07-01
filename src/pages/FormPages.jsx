@@ -9,18 +9,39 @@ const FormPages = () => {
 
     setUsers([...users, { name, email, password, confirm, quote }])
 
-    if (name.trim().length < 6) setNameError(true)
-    if (!email.includes('@')) setEmailError(true);
-    if (password.trim().length < 4) setPasswordError(true);
-    if (confirm !== password) setConfirmError(true);
+    if (name.trim().length <= 6) {
+      setNameError(true)
+      setName(name)
+    } else {
+      setName('')
+    }
+
+    if (!email.includes('@')) {
+      setEmailError(true)
+      setEmail(email)
+    } else {
+      setEmail('')
+    }
+    if (password.trim().length < 4) {
+      setPasswordError(true)
+      setPassword(password)
+    } else {
+      setPassword("")
+    }
+    if (confirm !== password) {
+      setConfirmError(true)
+      setConfirm(confirm)
+    } else {
+      setConfirm("")
+    }
 
 
-    setName("")
-    setPassword("")
-    setConfirm("")
-    setEmail("")
+
+
+    // setPassword("")
+    // setConfirm("")
+    // setEmail("")
     setQuote("No Quotes, just be good!!")
-    console.log("Form submitted with name:", name);
   };
 
 
@@ -43,21 +64,31 @@ const FormPages = () => {
 
   // }
   return (
-    <div className=" flex justify-center items-center h-screen pl-10 pr-32"> 
+    <section className=" flex justify-center items-center h-screen pl-10 pr-32">
 
-<div className=' w-[50%] flex items-center justify-center'>
-  <img src={backgroungImage} alt=""  className=' w-[70%]'/>
-</div>
+      <main className=' w-[50%] flex items-center justify-center'>
+        <img src={backgroungImage} alt="" className=' w-[70%]' />
+      </main>
 
 
       <form onSubmit={handleSubmit} className=' w-[50%] px-10 shadow-[0_10px_60px_rgba(23,184,166,0.7)] flex flex-col gap-10 py-10 rounded-2xl'>
-        <div  className='flex flex-col gap-1.5'>
-          <label htmlFor="full_name" className=' font-semibold'>Full Name:</label>
-          <input type="text" id='full_name' placeholder='e.g Untitled Dev' className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light' value={name} onChange={(e) => {
+        <div>
+
+
+
+          <label htmlFor="full_name">Full Name:</label>
+          <input type="text" id='full_name' placeholder='e.g Untitled Dev' value={name} onChange={(e) => {
             setName(e.target.value)
-            if (nameError) setNameError('')
-          }} /> {name}
-          {nameError && (<p>name is too short</p>)}
+            if (nameError) {
+              setNameError('')
+              setEmailError("")
+              setPasswordError("")
+              setConfirmError("")
+            }
+          }}
+            className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
+          />
+          {nameError && (<p>Name is too short 🤦‍♂️</p>)}
         </div>
 
 
@@ -65,43 +96,68 @@ const FormPages = () => {
 
         <div className='flex flex-col'>
           <label htmlFor="email">Email</label>
-          <input type="text" id='email' placeholder='joe@gmail.com' className='' value={email} onChange={(e) => {
+          <input type="text" id='email' placeholder='joe@gmail.com' value={email} onChange={(e) => {
             setEmail(e.target.value)
-            if (emailError) setEmailError("")
-          }} /> {email}
-          {emailError && (<p>put a valid email</p>)}
+            if (emailError) {
+              setNameError('')
+              setEmailError("")
+              setPasswordError("")
+              setConfirmError("")
+            }
+          }}
+            className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
+          />
+          {emailError && (<p>Please enter a valid email</p>)}
         </div>
 
 
 
         <div className='flex flex-col'>
           <label htmlFor="password">Password</label>
-          <input type="text" id='password' placeholder='abc12!' className='' value={password} onChange={(e) => {
+          <input type="text" id='password' placeholder='abc12!' value={password} onChange={(e) => {
             setPassword(e.target.value)
-            if (passwordError) setPasswordError("")
-          }} /> {password}
-          {passwordError && (<p>add more srtdvdv</p>)}
+            if (passwordError) {
+              setNameError('')
+              setEmailError("")
+              setPasswordError("")
+              setConfirmError("")
+            }
+          }}
+            className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
+          />
+          {passwordError && (<p>Password must be 6 characters long</p>)}
         </div>
 
 
 
         <div className='flex flex-col'>
           <label htmlFor="confirm_password">Confirm Password</label>
-          <input type="text" id='confirm_password' placeholder='same as password' className='' value={confirm} onChange={(e) => {
+          <input type="text" id='confirm_password' placeholder='same as password' value={confirm} onChange={(e) => {
             setConfirm(e.target.value)
-            if (confirm) setConfirmError("")
-            }} /> {confirm}
-          {confirmError && (<p>password doest match </p>)}
+            if (confirm) {
+              setNameError('')
+              setEmailError("")
+              setPasswordError("")
+              setConfirmError("")
+            }
+          }}
+            className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
+          />
+          {confirmError && (<p>password does'nt match !! </p>)}
         </div>
 
 
 
         <div className='flex flex-col'>
           <label htmlFor="quote">Quote of the Day</label>
-          <textarea id="quote" className='border-2 h-[60px] focus:border-[#17B8A6] max-h-[100px]' value={quote} onChange={(e) => setQuote(e.target.value)}/> {quote}
+          <textarea id="quote" className='border-2 h-[60px] focus:border-[#17B8A6] max-h-[100px]' value={quote} onChange={(e) => setQuote(e.target.value)} />
         </div>
         <button className=' border-2' type='submit'>Submit</button>
       </form>
+
+      {/* <Link>
+            <p>view all registerd form</p>
+      </Link> */}
 
 
 
@@ -110,7 +166,7 @@ const FormPages = () => {
           </div>
           ))} */}
       {/* <FormCard /> */}
-    </div>
+    </section>
   )
 }
 
