@@ -66,14 +66,22 @@ const FormPages = () => {
     <>
 
 
-      <section className=" flex justify-center items-center h-screen pl-10 pr-32 mb-20">
+      <section className=" flex justify-center items-center h-screen pl-10 pr-32 mb-20
+      max-tablet:bg-amber-400 max-tablet:block  max-tablet:p-10 max-tablet:mb-0 max-tablet:py-24
+      max-mobile:bg-gray-500 max-mobile:px-4 max-mobile:py-10
+      ">
 
-        <main className=' w-[50%] flex items-center justify-center'>
+        <main className=' w-[50%] flex items-center justify-center
+        max-tablet:hidden
+        '>
           <img src={backgroungImage} alt="" className=' w-[70%]' />
         </main>
 
 
-        <form onSubmit={handleSubmit} className=' w-[50%] px-10 shadow-[0_10px_60px_rgba(23,184,166,0.7)] flex flex-col gap-10 py-10 rounded-2xl'>
+        <form onSubmit={handleSubmit} className=' w-[50%] px-10 shadow-[0_10px_60px_rgba(23,184,166,0.7)] flex flex-col gap-10 py-10 rounded-2xl
+        max-tablet:w-[70%] max-tablet:mx-auto
+        max-mobile:w-full
+        '>
           <div>
 
 
