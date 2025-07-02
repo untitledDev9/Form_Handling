@@ -67,8 +67,8 @@ const FormPages = () => {
 
 
       <section className=" flex justify-center items-center h-screen pl-10 pr-32 mb-20
-      max-tablet:bg-amber-400 max-tablet:block  max-tablet:p-10 max-tablet:mb-0 max-tablet:py-24
-      max-mobile:bg-gray-500 max-mobile:px-4 max-mobile:py-10
+      max-tablet:block  max-tablet:p-10 max-tablet:mb-0 max-tablet:py-24
+      max-mobile:px-4 max-mobile:py-10
       ">
 
         <main className=' w-[50%] flex items-center justify-center
