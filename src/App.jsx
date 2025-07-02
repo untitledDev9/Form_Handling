@@ -1,11 +1,17 @@
 import React from 'react'
 import FormPages from './pages/FormPages'
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
+import FormCard from './component/FormCard'
+
 
 const App = () => {
   return (
-    <div>
-      <FormPages />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<FormPages />}/>
+      <Route path='/form-card' element={<FormCard />}/>
+    </Routes>
+    </BrowserRouter>
   )
 }
 

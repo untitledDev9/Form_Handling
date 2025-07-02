@@ -1,49 +1,9 @@
 import { useState } from 'react'
 import FormCard from '../component/FormCard';
 import backgroungImage from "../assets/undraw_business-man_0ifc.svg";
+// import { Link } from 'react-router-dom';
 
 const FormPages = () => {
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setUsers([...users, { name, email, password, confirm, quote }])
-
-    if (name.trim().length <= 6) {
-      setNameError(true)
-      setName(name)
-    } else {
-      setName('')
-    }
-
-    if (!email.includes('@')) {
-      setEmailError(true)
-      setEmail(email)
-    } else {
-      setEmail('')
-    }
-    if (password.trim().length < 4) {
-      setPasswordError(true)
-      setPassword(password)
-    } else {
-      setPassword("")
-    }
-    if (confirm !== password) {
-      setConfirmError(true)
-      setConfirm(confirm)
-    } else {
-      setConfirm("")
-    }
-
-
-
-
-    // setPassword("")
-    // setConfirm("")
-    // setEmail("")
-    setQuote("No Quotes, just be good!!")
-  };
-
 
   const [name, setName] = useState("")
   const [nameError, setNameError] = useState(false)
@@ -60,11 +20,53 @@ const FormPages = () => {
   const [quote, setQuote] = useState("No Quotes, just be good!!")
 
   const [users, setUsers] = useState([])
-  // const submitForm = () => {
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let isValid = true;
 
-  // }
+
+    setNameError (false)
+    setEmailError (false)
+    setPasswordError (false)
+    setConfirmError (false)
+
+    if (name.trim().length <= 6){
+      setNameError(true);
+    isValid = false
+  };
+  if (!email.includes("@")) {
+    setEmailError(true)
+    isValid = false
+  }
+  if (password.trim().length < 4) {
+    setPasswordError(true)
+    isValid = false
+  }
+  if (confirm !== password) {
+    setConfirmError(true)
+    isValid = false
+  }
+
+  if (!isValid) return;
+
+  setUsers([...users, { name, email, password, confirm, quote }])
+
+  console.log("Glitch Submitted the Form :", name, email, password, confirm);
+
+  setName("");
+  setEmail("");
+  setPassword("");
+  setConfirm("");
+  setQuote("No QUotes, just be Good Blessing")
+
+}
+
   return (
-    <section className=" flex justify-center items-center h-screen pl-10 pr-32">
+    <>
+    
+
+    <section className=" flex justify-center items-center h-screen pl-10 pr-32 mb-20">
 
       <main className=' w-[50%] flex items-center justify-center'>
         <img src={backgroungImage} alt="" className=' w-[70%]' />
@@ -80,10 +82,8 @@ const FormPages = () => {
           <input type="text" id='full_name' placeholder='e.g Untitled Dev' value={name} onChange={(e) => {
             setName(e.target.value)
             if (nameError) {
-              setNameError('')
-              setEmailError("")
-              setPasswordError("")
-              setConfirmError("")
+              setNameError(false)
+    
             }
           }}
             className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
@@ -99,10 +99,9 @@ const FormPages = () => {
           <input type="text" id='email' placeholder='joe@gmail.com' value={email} onChange={(e) => {
             setEmail(e.target.value)
             if (emailError) {
-              setNameError('')
-              setEmailError("")
-              setPasswordError("")
-              setConfirmError("")
+             
+              setEmailError(false)
+             
             }
           }}
             className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
@@ -117,10 +116,9 @@ const FormPages = () => {
           <input type="text" id='password' placeholder='abc12!' value={password} onChange={(e) => {
             setPassword(e.target.value)
             if (passwordError) {
-              setNameError('')
-              setEmailError("")
-              setPasswordError("")
-              setConfirmError("")
+            
+              setPasswordError(false)
+             
             }
           }}
             className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
@@ -135,10 +133,8 @@ const FormPages = () => {
           <input type="text" id='confirm_password' placeholder='same as password' value={confirm} onChange={(e) => {
             setConfirm(e.target.value)
             if (confirm) {
-              setNameError('')
-              setEmailError("")
-              setPasswordError("")
-              setConfirmError("")
+              
+              setConfirmError(false)
             }
           }}
             className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
@@ -153,20 +149,26 @@ const FormPages = () => {
           <textarea id="quote" className='border-2 h-[60px] focus:border-[#17B8A6] max-h-[100px]' value={quote} onChange={(e) => setQuote(e.target.value)} />
         </div>
         <button className=' border-2' type='submit'>Submit</button>
+      {/* <Link to='/form-card' >
+            <h2 className=' text-[#fff] font-semibold bg-[#17B8A6] py-2 rounded text-center mx-auto'>View all registerd form</h2>
+      </Link> */}
       </form>
 
-      {/* <Link>
-            <p>view all registerd form</p>
-      </Link> */}
 
 
 
-      {/* {users.map((data, index) => (
-          <div key={index}>
-          </div>
-          ))} */}
-      {/* <FormCard /> */}
     </section>
+      {users.map((data, index) => (
+          <div key={index} className=' px-18 py-10'>
+            <FormCard 
+            name={data.name}
+            email={data.email}
+            quote={data.quote}
+            />
+          </div>
+          ))}
+
+        </>
   )
 }
 

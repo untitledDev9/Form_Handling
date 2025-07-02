@@ -35,6 +35,11 @@ button {
   border: none;
   color: white;
   border-radius: 5px;
+  transition: all .3s ease-in-out;
+}
+
+button:hover {
+  background-color: #117065;
 }
 
 p {
