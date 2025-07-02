@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FormCard from '../component/FormCard';
 import backgroungImage from "../assets/undraw_business-man_0ifc.svg";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
 const FormPages = () => {
@@ -20,6 +21,8 @@ const FormPages = () => {
   const [quote, setQuote] = useState("No Quotes, just be good!!")
 
   const [users, setUsers] = useState([])
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +64,8 @@ const FormPages = () => {
     setQuote("No Quotes, just be Good")
 
   }
+
+
 
   return (
     <>
@@ -119,26 +124,38 @@ const FormPages = () => {
 
 
 
-          <div className='flex flex-col'>
+          <div className='flex flex-col relative'>
             <label htmlFor="password">Password</label>
-            <input type="text" id='password' placeholder='abc12!' value={password} onChange={(e) => {
-              setPassword(e.target.value)
-              if (passwordError) {
-
-                setPasswordError(false)
-
-              }
-            }}
-              className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              placeholder="abc12!"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (passwordError) {
+                  setPasswordError(false);
+                }
+              }}
+              className="w-full pr-10 border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in"
             />
+
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              className=' absolute top-10 right-3'>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
+
+
+
             {passwordError && (<p>Password must be 6 characters long</p>)}
           </div>
 
 
 
-          <div className='flex flex-col'>
+          <div className='flex flex-col relative'>
             <label htmlFor="confirm_password">Confirm Password</label>
-            <input type="text" id='confirm_password' placeholder='same as password' value={confirm} onChange={(e) => {
+            <input type={showConfirm ? "text" : "password"} id='confirm_password' placeholder='same as password' value={confirm} onChange={(e) => {
               setConfirm(e.target.value)
               if (confirm) {
 
@@ -147,6 +164,11 @@ const FormPages = () => {
             }}
               className=' border-2 input focus:outline-none focus:border-0 focus:border-b-2 focus:border-[#17B8A6] placeholder:text-[#6969698b] placeholder:text-[13px] placeholder:font-light transition-all duration-200 ease-in'
             />
+            <div
+              onClick={() => setShowConfirm(!showConfirm)}
+              className=' absolute top-10 right-3'>
+              {showConfirm ? <FaEyeSlash /> : <FaEye />}
+            </div>
             {confirmError && (<p>password does'nt match !! </p>)}
           </div>
 
@@ -167,18 +189,18 @@ const FormPages = () => {
 
       </section>
 
-      
-<section className='  flex gap-22 flex-wrap items-center justify-center py-18'>
-    {users.map((data, index) => (
-      <section key={index} className="w-fit">
-        <FormCard
-          name={data.name}
-          email={data.email}
-          quote={data.quote}
-        />
+
+      <section className='  flex gap-22 flex-wrap items-center justify-center py-18'>
+        {users.map((data, index) => (
+          <section key={index} className="w-fit">
+            <FormCard
+              name={data.name}
+              email={data.email}
+              quote={data.quote}
+            />
+          </section>
+        ))}
       </section>
-    ))}
-</section>
 
 
     </>
