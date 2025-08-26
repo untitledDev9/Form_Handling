@@ -7,6 +7,10 @@
         --breakpoint-mobile: 501px;
     }
 
+    .muinpute {
+      border: 3px solid black;
+    }
+
 
 body {
   font-family: "Poppins", sans-serif;

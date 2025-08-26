@@ -55,7 +55,7 @@ const FormPages = () => {
 
     setUsers([...users, { name, email, password, confirm, quote }])
 
-    console.log("Glitch Submitted the Form :", name, email, password, confirm);
+    // console.log("Glitch Submitted the Form :", name, email, password, confirm);
 
     setName("");
     setEmail("");
@@ -68,7 +68,7 @@ const FormPages = () => {
 
 
   return (
-    <>
+    <> 
 
 
       <section className=" flex justify-center items-center h-screen pl-10 pr-32 mb-20
